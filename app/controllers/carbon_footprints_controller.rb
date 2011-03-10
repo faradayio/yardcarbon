@@ -3,11 +3,14 @@ class CarbonFootprintsController < ApplicationController
   
   respond_to do |wants|
     wants.js do
+      @environment = Environment.find(params[:environment_id])
       @title = 'Carbon footprint' # Assuming ivar name
-      # These should be pulled from the environment we're looking at.
-      @carrier = 'ec2'
-      @instance_class = 'm1.large'
-      @duration = 100
+      
+      @carrier = @environment.carrier.name # 'ec2'
+      @instances = @environment.instances.inject({}) do |memo, instance|
+        memo[instance.instance_type] ||= 0 # 'm1.large'
+        memo[instance.instance_type] += instance.hours # 100 (hours since environment creation)
+      end
     end
   end
 end

@@ -1,3 +1,22 @@
 <div class="carbon_footprint_box">
+  <p class="footprint">769.44 kg CO<sub>2</sub>e</p>
+  <p class="description">Cumulative carbon footprint since <%= @carrier %> environment creation</p>
+  <table class="instance_types">
+    <th>
+      <td>Instance type</td>
+      <td>Compute time</td>
+      <td>Carbon footprint</td>
+    </th>
+    <%= render :partial => 'instance_type', :collection => @instances, :as => :instance %>
+  </table>
 </div>
-
+<script type="text/javascript">
+$(document).ready(function() {
+  $('.carbon_footprint_box table.instance_types tr.instance_type').each(function() {
+    carrier = <%= @carrier %>;
+    instanceType = this.find('td.instance_class').html();
+    duration = this.find('td.duration').html();
+    Carbon.calculate('computation', { 'carrier': carrier, 'instance_type': instanceType, 'duration': duration }, this);
+  });
+});
+</script>
