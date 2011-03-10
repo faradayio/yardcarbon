@@ -16,6 +16,7 @@ $(document).ready(function() {
     carrier = <%= @carrier %>;
     instanceType = this.find('td.instance_class').html();
     duration = this.find('td.duration').html();
+    // FIXME the following is pseudocode pending Carbon.js documentation
     Carbon.calculate('computation', { 'carrier': carrier, 'instance_type': instanceType, 'duration': duration }, this);
   });
 });
