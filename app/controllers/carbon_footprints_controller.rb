@@ -1,5 +1,5 @@
 class CarbonFootprintsController < ApplicationController
-  layout 'thickbox' # Assuming this is how this is handled
+  layout 'thickbox' # Whatever layout is used for the "HTTP Monitoring" lightbox
   
   respond_to do |wants|
     wants.js do

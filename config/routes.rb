@@ -1,5 +1,9 @@
 Cloud::Application.routes.draw do
-  map.resources :environments do
-    map.resource :carbon_footprint, :only => :show
+  # you already have /environments/:environment_id/monitored_urls
+  # so we're adding  /environments/:environment_id/carbon_footprint
+  resources :environments do
+    # [...]
+    resource :carbon_footprint, :only => :show
+    # [...]
   end
 end
