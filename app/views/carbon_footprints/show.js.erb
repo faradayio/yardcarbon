@@ -15,13 +15,31 @@
   <p>Powered by <a href="http://brighterplanet.com">Brighter Planet</a></p>
 </div>
 <script type="text/javascript">
+
+
+function Instance() {}
+Carbon.emitter(Instance, function(emitter) {
+  emitter.emitAs('computation')
+  emitter.provide('carrier')
+  emitter.provide('instance_type', { as: 'type' })
+  emitter.provide('duration')
+})
+
 $(document).ready(function() {
   $('.carbon_footprint_box table.instance_types tr.instance_type').each(function() {
-    carrier = <%= @carrier %>;
-    instanceType = this.find('td.instance_class').html();
-    duration = this.find('td.duration').html();
-    // FIXME the following is pseudocode pending Carbon.js documentation
-    Carbon.calculate('computation', { 'carrier': carrier, 'instance_type': instanceType, 'duration': duration }, this);
+    var instance = new Instance()
+    instance.duration = this.find('td.duration').html();
+    instance.carrier = '<%= @carrier %>';
+    instance.type = this.find('td.instance_class').html();
+
+    var carbonTd = this.find('td.carbon_footprint')
+    onSuccess = function(estimate) {
+      carbonTd.html(estimate.value() + 'kgCO2<sub>e</sub>')
+    }
+    onError = function() {
+      carbonTd.html('Failed to get estimate')
+    }
+    instance.getEmissionEstimate(onSuccess, onError)
   });
 });
 </script>
