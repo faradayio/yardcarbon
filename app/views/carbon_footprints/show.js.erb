@@ -1,14 +1,18 @@
 <div class="carbon_footprint_box">
-  <p class="footprint">769.44 kg CO<sub>2</sub>e</p>
-  <p class="description">Cumulative carbon footprint since <%= @carrier %> environment creation</p>
+  <p><strong>769.44 kg CO<sub>2</sub>e</strong> cumulative carbon footprint</p>
   <table class="instance_types">
-    <th>
-      <td>Instance type</td>
-      <td>Compute time</td>
-      <td>Carbon footprint</td>
-    </th>
-    <%= render :partial => 'instance_type', :collection => @instances, :as => :instance %>
+    <thead>
+      <th>
+        <td>Instance type</td>
+        <td>Compute time</td>
+        <td>Carbon footprint</td>
+      </th>
+    </thead>
+    <tbody>
+<%= render :partial => 'instance_type', :collection => @instances, :as => :instance %>
+    </tbody>
   </table>
+  <p>Powered by <a href="http://brighterplanet.com">Brighter Planet</a></p>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
