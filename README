@@ -11,4 +11,12 @@ What you'll find in this repo:
 * 1 controller action
 * 2 view files
 
+The javascript makes an API call like: (amazon c1.xlarge instance running for a month in us-east-1a)
+
+http://carbon.brighterplanet.com/computations.json?carrier=amazon&carrier_instance_class=c1.xlarge&duration=2700000&carrier_region=us-east-1a
+
+You can also see a pretty methodology document for this same calculation by requesting HTML format:
+
+http://carbon.brighterplanet.com/computations.html?carrier=amazon&carrier_instance_class=c1.xlarge&duration=2700000&carrier_region=us-east-1a
+
 Any questions, please call Andy (x302) or Seamus (x305) on our main line (802) 458-0441.
