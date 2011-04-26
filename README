@@ -1,22 +1,23 @@
 CARBON FOOTPRINT DROP-IN CODE FOR EY CLOUD DASHBOARD
 ----------------------------------------------------
-By Brighter Planet, For Our Favorite PaaS
+By Brighter Planet, For EngineYard, Our Favorite PaaS
 
-Check out doc/popup.png for how it should look.
-
-We're basing it off how you guys do the HTTP Monitoring lightbox in More Options.
+We're basing it off how you guys do the "HTTP Monitoring" lightbox in "More Options." Check out doc/popup.png for how it should look.
 
 What you'll find in this repo:
-* 1 route /environments/X/carbon_footprint
-* 1 controller action
-* 2 view files
+ * 1 new route - /environments/XYZ/carbon_footprint
+ * 1 new action - CarbonFootprintsController#show
+ * 1 new view file - app/views/carbon_footprints/show.js.erb
+ * 1 new javascript file - public/javascripts/Carbon.js
 
-The javascript makes an API call like: (amazon c1.xlarge instance running for a month in us-east-1a)
+The javascript makes an API call like:
 
-http://carbon.brighterplanet.com/computations.json?carrier=amazon&carrier_instance_class=c1.xlarge&duration=2700000&carrier_region=us-east-1a
+http://carbon.brighterplanet.com/computations.json?carrier=amazon&instance_class=c1.xlarge&duration=2700000&region=us-east-1a
 
-You can also see a pretty methodology document for this same calculation by requesting HTML format:
+...or in HTML format for human consumption...
 
-http://carbon.brighterplanet.com/computations.html?carrier=amazon&carrier_instance_class=c1.xlarge&duration=2700000&carrier_region=us-east-1a
+http://carbon.brighterplanet.com/computations.html?carrier=amazon&instance_class=c1.xlarge&duration=2700000&region=us-east-1a
+
+No customer or personally-identifiable information is sent or stored. It's all client-side javascript.
 
 Any questions, please call Andy (x302) or Seamus (x305) on our main line (802) 458-0441.

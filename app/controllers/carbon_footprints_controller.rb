@@ -1,16 +1,19 @@
 class CarbonFootprintsController < ApplicationController
-  layout 'thickbox' # Whatever layout is used for the "HTTP Monitoring" lightbox
+  # Whatever layout is used for the "HTTP Monitoring" lightbox
+  layout 'thickbox'
   
-  respond_to do |wants|
-    wants.js do
-      @environment = Environment.find(params[:environment_id])
-      @title = 'Carbon footprint' # Assuming ivar name
-      
-      @carrier = @environment.carrier.name # 'ec2'
-      @instances = @environment.instances.inject({}) do |memo, instance|
-        memo[instance.instance_type] ||= 0 # 'm1.large'
-        memo[instance.instance_type] += instance.hours # 100 (hours since environment creation)
-      end
+  # The native EngineYard Environment object, e.g. @environment
+  before_filter :set_environment
+  
+  # /environments/XYZ/carbon_footprint
+  def show
+    @api_key = '7093c926cffc1afcdd389b5c18412e93'                                             # your api key (this is real)
+    @carrier = @environment.carrier                                                           # 'amazon' or 'terremark', etc.
+    @instance_classes_and_durations = @environment.instances.inject({}) do |memo, instance|
+      instance_class = instance.instance_class                                                # 'm1.large'
+      memo[instance_class] ||= 0 
+      memo[instance_class] += instance.hours * 60 * 60                                        # seconds
+      memo
     end
   end
 end
