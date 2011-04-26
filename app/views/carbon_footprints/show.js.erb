@@ -21,7 +21,7 @@ function Instance() {}
 Carbon.emitter(Instance, function(emitter) {
   emitter.emitAs('computation')
   emitter.provide('carrier')
-  emitter.provide('instance_type', { as: 'type' })
+  emitter.provide('type', { as: 'instance_class' })
   emitter.provide('duration')
 })
 
